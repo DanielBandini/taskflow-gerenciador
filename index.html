@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="TaskFlow: organize tarefas e acompanhe seu progresso.">
+  <title>TaskFlow | Organize seu dia</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Menu lateral">
+      <a class="brand" href="#inicio" aria-label="TaskFlow - início"><span class="brand-mark">✓</span><span>Task<span class="brand-accent">Flow</span></span></a>
+      <div class="nav-caption">ÁREA DE TRABALHO</div>
+      <nav class="side-nav" aria-label="Navegação">
+        <button type="button" class="nav-item active" data-nav="all"><span aria-hidden="true">▦</span> Visão geral</button>
+        <button type="button" class="nav-item" data-nav="today"><span aria-hidden="true">◷</span> Para hoje</button>
+        <button type="button" class="nav-item" data-nav="upcoming"><span aria-hidden="true">▤</span> Próximas tarefas</button>
+        <button type="button" class="nav-item" data-nav="done"><span aria-hidden="true">✓</span> Concluídas</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="sidebar-tip"><span class="tip-icon">✦</span><strong>Uma tarefa de cada vez.</strong><p>Organize suas prioridades e avance no seu ritmo.</p></div><small>TaskFlow • Projeto acadêmico</small></div>
+    </aside>
+    <main class="main" id="inicio">
+      <header class="topbar"><span class="topbar-label">Meu espaço <span>/</span> Dashboard</span><div class="top-actions"><button id="themeToggle" class="icon-button" type="button" aria-label="Alternar tema" title="Alternar tema">☀</button><span class="avatar" aria-hidden="true">TF</span></div></header>
+      <div class="content">
+        <div class="welcome"><div><div class="eyebrow"><span class="online-dot"></span> SEU PAINEL DE PRODUTIVIDADE</div><h1>Organize seu dia<span class="period">.</span></h1><p>Menos bagunça, mais conquistas. Suas tarefas em um só lugar.</p></div><button type="button" class="primary-button" id="openTaskModal"><span aria-hidden="true">＋</span> Nova tarefa</button></div>
+        <section class="stats" aria-label="Resumo das tarefas"><article class="stat-card"><span class="stat-label">Total de tarefas <span class="stat-symbol purple">▦</span></span><strong id="totalStat">0</strong><small>Tudo que você planejou</small></article><article class="stat-card"><span class="stat-label">Em andamento <span class="stat-symbol orange">◷</span></span><strong id="pendingStat">0</strong><small>Próximos passos</small></article><article class="stat-card"><span class="stat-label">Concluídas <span class="stat-symbol green">✓</span></span><strong id="doneStat">0</strong><small>Missões cumpridas</small></article><article class="stat-card progress-card"><span class="stat-label">Seu progresso <span class="stat-symbol blue">↗</span></span><strong id="progressStat">0%</strong><div class="progress-track" role="progressbar" aria-label="Progresso de tarefas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div id="progressFill"></div></div></article></section>
+        <section class="tasks-panel" aria-labelledby="tasksTitle"><div class="panel-heading"><div><div class="eyebrow panel-eyebrow">FOCO NO QUE IMPORTA</div><h2 id="tasksTitle">Minhas tarefas <span id="taskCount" class="count-badge">0</span></h2></div><button type="button" class="text-button" id="clearCompleted">Limpar concluídas</button></div>
+          <div class="toolbar"><div class="filters" role="group" aria-label="Filtrar tarefas"><button type="button" data-filter="all" class="filter active">Todas</button><button type="button" data-filter="pending" class="filter">Pendentes</button><button type="button" data-filter="done" class="filter">Concluídas</button></div><label class="search"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Buscar tarefa..." aria-label="Buscar tarefa"></label></div>
+          <div id="taskList" class="task-list" aria-live="polite"></div><div id="emptyState" class="empty-state" hidden><div class="empty-illustration">☑</div><h3>Nada por aqui ainda!</h3><p>Crie uma tarefa ou experimente mudar os filtros.</p><button type="button" class="secondary-button" id="emptyAdd">＋ Adicionar tarefa</button></div>
+        </section><footer>Feito para transformar planos em conquistas ✦</footer>
+      </div>
+    </main>
+  </div>
+  <dialog id="taskDialog" aria-labelledby="dialogTitle"><form id="taskForm"><div class="dialog-header"><div><span class="eyebrow">ORGANIZE SEUS PLANOS</span><h2 id="dialogTitle">Nova tarefa</h2></div><button type="button" id="closeDialog" class="close-button" aria-label="Fechar">×</button></div><div class="dialog-fields"><label for="taskTitle">Título da tarefa <span class="required">*</span></label><input id="taskTitle" name="title" type="text" maxlength="100" required placeholder="Ex.: Estudar para a prova"><label for="taskDescription">Descrição <span class="optional">(opcional)</span></label><textarea id="taskDescription" name="description" rows="3" maxlength="400" placeholder="Adicione detalhes sobre a tarefa..."></textarea><div class="field-row"><div><label for="taskPriority">Prioridade</label><select name="priority" id="taskPriority"><option value="low">Baixa</option><option value="medium" selected>Média</option><option value="high">Alta</option></select></div><div><label for="taskDate">Data limite <span class="optional">(opcional)</span></label><input type="date" id="taskDate" name="dueDate"></div></div></div><div class="dialog-actions"><button type="button" class="secondary-button" id="cancelDialog">Cancelar</button><button type="submit" class="primary-button" id="saveTask">Salvar tarefa</button></div></form></dialog>
+  <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+</body>
+</html>
