@@ -106,3 +106,11 @@ function applyTheme(theme) { document.body.classList.toggle('light', theme === '
 let theme = localStorage.getItem(THEME_KEY) === 'light' ? 'light' : 'dark'; applyTheme(theme);
 $('#themeToggle').addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; applyTheme(theme); try { localStorage.setItem(THEME_KEY, theme); } catch {} });
 render();
+
+// Atalho de produtividade: Ctrl+K (ou Cmd+K) abre a busca.
+document.addEventListener('keydown', event => {
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+    event.preventDefault();
+    elements.search.focus();
+  }
+});
